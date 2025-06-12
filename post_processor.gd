@@ -46,8 +46,6 @@ func is_rendering() -> bool:
 	return self.material != null && self.input != null
 
 func reset() -> void:
-	print("resetting post processor")
-
 	# free old chain
 	if self.chain_root != null:
 		self.chain_root.free()
@@ -77,7 +75,6 @@ func reset() -> void:
 	# for all shaders in chain...
 	for index: int in range(0, self.chain.chain.size()):
 		var mat: ShaderMaterial = self.chain.chain[index]
-		print("\t-- material: ", mat)
 
 		if index == self.chain.chain.size() - 1:
 			# last shader, which is rendered to self
