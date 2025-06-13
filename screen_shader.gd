@@ -1,9 +1,9 @@
 @tool
 class_name ScreenShader extends CanvasLayer
 
-const REGION_UNIFORM: StringName = &"texture_region"
+# const REGION_UNIFORM: StringName = &"texture_region"
 
-var material: ShaderMaterial:
+@export var material: ShaderMaterial:
 	get:
 		return material
 	set(value):
@@ -16,6 +16,7 @@ var material: ShaderMaterial:
 			printerr("[PostProcessing] expected CanvasItem shader")
 			return
 		material = value
+		self.output.material = material
 		self.material_changed.emit()
 
 var input: BackBufferCopy
