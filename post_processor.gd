@@ -38,9 +38,22 @@ var chain_root: Node = null
 			if child is Viewport:
 				(child as Viewport).use_hdr_2d = use_hdr
 
+func _validate_property(property: Dictionary) -> void:
+	super(property)
+	match property.name:
+		&"input":
+			property.usage = PROPERTY_USAGE_READ_ONLY
+
 func _init() -> void:
 	super()
-	self.item_rect_changed.connect(self._on_render_rect_changed)
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_RESIZED:
+			if self.chain_root != null:
+				for child: Node in self.chain_root.get_children():
+					assert(child is SubViewport)
+					(child as SubViewport).size = self.size
 
 func is_rendering() -> bool:
 	return self.material != null && self.input != null
@@ -122,9 +135,3 @@ func reset() -> void:
 
 func _on_chain_changed() -> void:
 	self.reset.call_deferred()
-
-func _on_render_rect_changed() -> void:
-	if self.chain_root != null:
-		for child: Node in self.chain_root.get_children():
-			assert(child is SubViewport)
-			(child as SubViewport).size = self.size

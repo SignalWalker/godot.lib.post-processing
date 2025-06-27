@@ -20,5 +20,12 @@ static func with(vp: Viewport, mat: ShaderMaterial) -> ViewportShader:
 	res.input = vp
 	return res
 
+func _validate_property(property: Dictionary) -> void:
+	match property.name:
+		&"texture":
+			property.usage = PROPERTY_USAGE_READ_ONLY
+		&"expand_mode":
+			property.usage = PROPERTY_USAGE_READ_ONLY
+
 func _init() -> void:
-	pass
+	self.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
