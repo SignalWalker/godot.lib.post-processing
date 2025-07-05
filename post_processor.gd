@@ -43,6 +43,8 @@ func _validate_property(property: Dictionary) -> void:
 	match property.name:
 		&"input":
 			property.usage = PROPERTY_USAGE_READ_ONLY
+		&"material":
+			property.usage = PROPERTY_USAGE_READ_ONLY
 
 func _init() -> void:
 	super()

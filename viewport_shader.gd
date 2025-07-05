@@ -26,6 +26,8 @@ func _validate_property(property: Dictionary) -> void:
 			property.usage = PROPERTY_USAGE_READ_ONLY
 		&"expand_mode":
 			property.usage = PROPERTY_USAGE_READ_ONLY
+		&"use_parent_material":
+			property.usage = PROPERTY_USAGE_READ_ONLY
 
 func _init() -> void:
 	self.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
